@@ -6,11 +6,23 @@ import {Users} from './users'
 function App() {
   const [query,setQuery]= useState("");
 
-  const search = (data) => {
-    return data.filter((item)=> item.first_name.toLowerCase().includes(query) || item.last_name.toLowerCase().includes(query) || item.email.toLowerCase().includes(query));
+  const keys=["first_name","last_name","email"]
+
+  // Method 1
+
+  // const search = (data) => {
+  //   return data.filter((item)=> item.first_name.toLowerCase().includes(query) || item.last_name.toLowerCase().includes(query) || item.email.toLowerCase().includes(query));
+  // }
+
+  // Method 2 
+  const search=(data)=>{
+    return data.filter((item)=>
+      keys.some((key)=> item[key].toLowerCase().includes(query))
+    )
   }
 
   // console.log(Users.filter(user=> user.first_name.toLowerCase().includes("fe")));
+
   return (
     <div className="App">
       <input 
